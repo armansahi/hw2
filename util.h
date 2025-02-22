@@ -13,20 +13,33 @@
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> interResult; // intersection result
+  typename std::set<T>::iterator iter1 = s1.begin(); // Iterator for first set
+  typename std::set<T>::iterator iter2 = s2.begin(); // Iterator for second set
 
-
-
-
-
+  while(iter1 != s1.end() && iter2 != s2.end()) { // Iterate through both sets for common elements
+    if(*iter1 < *iter2) {
+      iter1++; // advance if first is smaller
+    }
+    else if (*iter2 < *iter1) {
+      iter2++; // advance if second is smaller
+    }
+    else {
+      interResult.insert(*iter1); 
+      iter1++; // equal
+      iter2++;
+    }
+  }
+  return interResult;
 }
+
+
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
-
-
-
-
-
+  std::set<T> unionResult = s1; // all elements from first set
+  unionResult.insert(s2.begin(), s2.end()); // insert all from second set
+  return unionResult;
 }
 
 /***********************************************/
@@ -46,4 +59,5 @@ std::string &rtrim(std::string &s) ;
 
 // Removes leading and trailing whitespace
 std::string &trim(std::string &s) ;
+
 #endif
